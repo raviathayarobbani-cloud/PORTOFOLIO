@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ravi.Creativity.com </title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  background:radial-gradient(circle at 20% 20%, #7a0000, #120000 70%);
+  color:white;
+  scroll-behavior:smooth;
+}
+
+nav{
+  display:flex;
+  justify-content:space-between;
+  padding:25px 8%;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:25px;
+  opacity:0.8;
+}
+
+nav a:hover{
+  color:#ff4d6d;
+}
+
+.section{
+  padding:80px 8%;
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s ease;
+}
+
+.section.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.section h2{
+  margin-bottom:30px;
+  color:#ff4d6d;
+}
+
+/* HERO + ABOUT WRAPPER */
+.hero{
+  padding:100px 8%;
+}
+
+.hero-wrapper{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:60px;
+}
+
+.hero-text{
+  flex:1;
+}
+
+.hero h1{
+  font-size:48px;
+}
+
+.identity{
+  margin-top:15px;
+  opacity:0.8;
+  line-height:1.6;
+}
+
+.hero-image{
+  flex:1;
+  display:flex;
+  justify-content:center;
+}
+
+.hero-image img{
+  width:320px;
+  border-radius:20px;
+  box-shadow:0 0 30px rgba(255,77,109,0.6);
+  transition:0.4s;
+}
+
+.hero-image img:hover{
+  transform:scale(1.05);
+}
+
+/* CARD */
+.card{
+  background:rgba(255,255,255,0.05);
+  padding:25px;
+  border-radius:15px;
+  margin-top:20px;
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 0 20px rgba(255,77,109,0.6);
+}
+
+/* FLIP-CARD */
+.flip-card {
+  width:320px;
+  height:420px;
+  perspective:1000px;
+}
+
+.flip-inner {
+  width:100%;
+  height:100%;
+  position:relative;
+  transition:transform 0.8s;
+  transform-style:preserve-3d;
+}
+
+.flip-card:hover .flip-inner {
+  transform:rotateY(180deg);
+}
+
+.flip-front,
+.flip-back {
+  position:absolute;
+  width:100%;
+  height:100%;
+  backface-visibility:hidden;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.flip-front img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:20px;
+  box-shadow:0 0 30px rgba(255,77,109,0.6);
+}
+
+.flip-back {
+  background: radial-gradient(circle at center, #8b0000, #1a0000 70%);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  transform:rotateY(180deg);
+  border-radius:20px;
+  box-shadow:0 0 30px rgba(255,77,109,0.6);
+}
+
+/* VIDEO */
+.video-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+/* VIDEO PREVIEW */
+.video-card{
+  position:relative;
+  border-radius:15px;
+  overflow:hidden;
+  cursor:pointer;
+}
+
+.video-card img{
+  width:100%;
+  display:block;
+  transition:0.4s;
+}
+
+.video-card:hover img{
+  transform:scale(1.1);
+}
+
+.play-overlay{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:50px;
+  color:white;
+  opacity:0;
+  transition:0.3s;
+}
+
+.video-card:hover .play-overlay{
+  opacity:1;
+}
+
+/* PHOTO */
+.photo-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.photo-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:15px;
+}
+
+.photo-card img{
+  width:100%;
+  transition:0.4s;
+}
+
+.photo-overlay{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  padding:15px;
+  transform:translateY(100%);
+  transition:0.4s;
+  font-size:14px;
+}
+
+.photo-card:hover img{
+  transform:scale(1.1);
+}
+
+.photo-card:hover .photo-overlay{
+  transform:translateY(0);
+}
+
+/* BEST CREATION */
+.best-container{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:50px;
+  margin-top:40px;
+  flex-wrap:wrap;
+}
+
+#best-project img{
+  width:350px;
+  border-radius:20px;
+  box-shadow:0 0 30px rgba(255,77,109,0.6);
+  transition:0.4s;
+}
+
+#best-project img:hover{
+  transform:scale(1.05);
+}
+
+.best-text{
+  max-width:500px;
+}
+
+.best-text h3{
+  margin-bottom:15px;
+  color:#ff4d6d;
+}
+
+.best-text p{
+  line-height:1.7;
+  opacity:0.85;
+}
+
+/* STATS SECTION */
+
+.stats-container{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  margin-top:40px;
+  flex-wrap:wrap;
+}
+
+.stat-box{
+  background:rgba(255,255,255,0.05);
+  padding:40px 50px;
+  border-radius:20px;
+  text-align:center;
+  transition:0.3s;
+}
+
+.stat-box:hover{
+  transform:translateY(-8px);
+  box-shadow:0 0 25px rgba(255,77,109,0.6);
+}
+
+.stat-box h3{
+  font-size:40px;
+  color:#ff4d6d;
+  margin-bottom:10px;
+}
+
+.stat-box p{
+  opacity:0.8;
+}
+
+/* SKILLS */
+.skill{
+  margin-bottom:20px;
+}
+
+.skill-name{
+  margin-bottom:6px;
+}
+
+.skill-bar{
+  width:100%;
+  height:8px;
+  background:rgba(255,255,255,0.1);
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.skill-fill{
+  height:100%;
+  background:#ff4d6d;
+  position:relative;
+  width:0;
+  transition:1.5s ease;
+  box-shadow:0 0 10px #ff4d6d, 0 0 20px #ff4d6d;
+}
+
+.skill-fill span{
+  position:absolute;
+  right:5px;
+  top:-22px;
+  font-size:12px;
+  color:#ff4d6d;
+  font-weight:bold;
+}
+
+/* SOCIAL */
+.social-grid{
+  display:flex;
+  gap:25px;
+}
+
+.social-grid a{
+  font-size:32px;
+  color:white;
+  transition:0.3s;
+}
+
+.social-grid a:hover{
+  color:#ff4d6d;
+  transform:scale(1.2);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-wrapper{
+    flex-direction:column;
+    text-align:center;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <h3>Ravi.Creativity</h3>
+  <div>
+    <a href="#about">About</a>
+    <a href="#video">Video</a>
+    <a href="#photo">Photo</a>
+    <a href="#skills">Skills</a>
+    <a href="#social">Connect</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-wrapper">
+
+    <div class="hero-text">
+      <h1>PORTOFOLIO MILIK RAVI</h1>
+      <div class="identity">
+        Asal/lahir: Indonesia/surabaya<br>
+        Kelas/Jurusan: XII-IPA-1.4
+      </div>
+
+      <div id="About">
+        <h2 style="margin-top:40px;">About Me (Storytelling Version)</h2>
+        <div class="card">
+          Nama saya Ravi Athaya Robbani.biasa dipanggil Ravi.saya percaya satu hal sederhana: apa yang kita ciptakan itu sebenarnya potret diri kita sendiri. Cara kita motret, cara kita ngedit, bahkan cara kita menulis program maupun cerita, semuanya nunjukin siapa kita sebenarnya.
+
+aku tertarik ke fotografi bukan cuma karena hasil fotonya, tapi karena prosesnya. Nunggu cahaya yang pas, nyari sudut yang beda, dan nangkep momen yang mungkin cuma kejadian sekali seumur hidup seolah menjadi tantangan untuk ku.
+
+Videografi untuk ku adalah cara bercerita yang lebih hidup. Gerak, suara, emosi, bagiku yang jarang bercerita. Ada kepuasan tersendiri waktu potongan-potongan klip yang awalnya random, pelan-pelan jadi cerita yang masterpiece lewat proses editing. Rasanya kayak nyusun main lego yang memiliki 1000 rangkaian.
+
+Di sisi lain, aku juga ada ketertarikan coding.awal nya karena berguna karena bisa digunakan untuk membantu promosi kerja orang tua dan menghasilkan uang, bahkan membantu orang lain. tapi saya menemukan tantangan yang beda bukan cuma soal estetika, tapi soal logika dan kreatifitas.
+
+Dan di tengah semua itu, saya hanya seorang pelajar yang terus belajar, terus eksplor, dan terus mencari titik tertinggi buat berkembang. Karena pada akhirnya, setiap karya yang gue buat adalah jejak kecil dari perjalanan gue sendiri.
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-image">
+  <div class="flip-card">
+    <div class="flip-inner">
+
+      <div class="flip-front">
+        <img src="iMG12.jpg" alt="Foto Ravi">
+      </div>
+
+      <div class="flip-back">
+        <h3>Kelas / Jurusan</h3>
+        <p>XII-IPA-1.4</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>
+
+<div class="section" id="video">
+  <h2>Some Of My Videography Result</h2>
+  <div class="video-grid">
+    
+
+    <a href="https://vt.tiktok.com/ZSm4Ef4DM/" target="_blank">
+      <div class="video-card">
+        <img src="thumbnail1.jpg" alt="Project 01">
+        <div class="play-overlay">
+          <i class="fa-solid fa-play"></i>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://vt.tiktok.com/ZSm4EXA5c/" target="_blank">
+      <div class="video-card">
+        <img src="thumbnail2.jpg" alt="Project 02">
+        <div class="play-overlay">
+          <i class="fa-solid fa-play"></i>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<div class="section" id="photo">
+  <h2>Some Of My Photography Result</h2>
+
+  <div class="photo-grid">
+
+    <div class="photo-card">
+      <img src="foto1.jpg">
+      <div class="photo-overlay">
+        <h3>Light Moon</h3>
+        <p>Tema: Pra-fullmoon on Vine Silhouette</p>
+      </div>
+    </div>
+
+    <div class="photo-card">
+      <img src="foto2.jpg">
+      <div class="photo-overlay">
+        <h3>Nature World</h3>
+        <p>Tema: Life To The Nature</p>
+      </div>
+    </div>
+
+    <div class="photo-card">
+      <img src="foto3.jpg">
+      <div class="photo-overlay">
+        <h3>Silhouette</h3>
+        <p>Tema: Emotional Silhouette</p>
+      </div>
+    </div>
+
+    <div class="photo-card">
+      <img src="foto4.jpg">
+      <div class="photo-overlay">
+        <h3>Lifes In Cinema</h3>
+        <p>Tema: Light & Cinema Tone</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section" id="best-project">
+  <h2 style="text-align:center;">One Of My Best Creation</h2>
+
+  <div class="best-container">
+    <img src="best.jpeg" alt="Best Project">
+
+    <div class="best-text">
+      <h3>The Quiet Place</h3>
+      <p>
+        Project ini jadi salah satu yang paling gue suka.
+Bukan karena objeknya, tapi karena ceritanya
+Dalam waktu singkat itu, ruangan yang biasa saja berubah jadi penuh rasa.
+Bayangan kursi, tembok terlukis cahaya, ruangan yang sunyi, kipas yang diam.
+Kesunyian kelas yang awalnya penuh drama kini kosong dan terciptalah The Quiet Place
+      </p>
+
+      <p>
+        <strong>Concept:</strong> Quiet Class<br>
+        <strong>Tools:</strong> Lightroom, Realme C55+RAW, & Snapseed
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="stats">
+  <h2>My Project</h2>
+
+  <div class="stats-container">
+
+    <div class="stat-box">
+      <h3>100+</h3>
+      <p>Project Photo Mandiri</p>
+    </div>
+
+    <div class="stat-box">
+      <h3>6</h3>
+      <p>Video Project</p>
+    </div>
+
+    <div class="stat-box">
+      <h3>2</h3>
+      <p>Coding Project</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="section" id="skills">
+  <h2>Skills</h2>
+
+  <div class="skill">
+  <div class="skill-name">Photography</div>
+  <div class="skill-bar">
+    <div class="skill-fill" data-width="86%">
+      <span>86%</span>
+    </div>
+  </div>
+</div>
+
+  <div class="skill">
+  <div class="skill-name">Videografi</div>
+  <div class="skill-bar">
+    <div class="skill-fill" data-width="77%">
+      <span>77%</span>
+    </div>
+  </div>
+</div>
+
+  <div class="skill">
+  <div class="skill-name">editing</div>
+  <div class="skill-bar">
+    <div class="skill-fill" data-width="68%">
+      <span>68%</span>
+    </div>
+  </div>
+</div>
+
+  <div class="skill">
+  <div class="skill-name">Coding</div>
+  <div class="skill-bar">
+    <div class="skill-fill" data-width="50%">
+      <span>50%</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="section" id="social">
+  <h2>Connect With Me</h2>
+  <div class="social-grid">
+    <a href="https://www.instagram.com/art_lens12" target="_blank">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+    <a href="https://www.tiktok.com/@entitaslangit" target="_blank">
+      <i class="fa-brands fa-tiktok"></i>
+    </a>
+  </div>
+</div>
+
+<script>
+const skillSection = document.querySelector("#skills");
+const skillFills = document.querySelectorAll(".skill-fill");
+
+function showSkills(){
+  const sectionTop = skillSection.getBoundingClientRect().top;
+  const triggerPoint = window.innerHeight - 100;
+
+  if(sectionTop < triggerPoint){
+    skillFills.forEach(fill => {
+      fill.style.width = fill.getAttribute("data-width");
+    });
+    window.removeEventListener("scroll", showSkills);
+  }
+}
+
+window.addEventListener("scroll", showSkills);
+</script>
+
+<script>
+const sections = document.querySelectorAll(".section");
+
+function revealSection(){
+  sections.forEach(section => {
+    const sectionTop = section.getBoundingClientRect().top;
+    const triggerPoint = window.innerHeight - 100;
+
+    if(sectionTop < triggerPoint){
+      section.classList.add("show");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealSection);
+revealSection();
+</script>
+
+</body>
+</html>
